@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Special Gift for Ernasari 🎀</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@300;500&family=Pinyon+Script&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <style>
+        :root { --pink: #ffc1cc; --dark-pink: #ff85a1; --bg: #fff5f7; --text: #5d4037; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: var(--bg); color: var(--text); font-family: 'Quicksand', sans-serif; overflow: hidden; height: 100vh; }
+
+        /* Background Music Button */
+        #musicToggle { position: fixed; top: 20px; right: 20px; z-index: 9999; background: white; border-radius: 50%; padding: 10px; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.1); border: none; font-size: 20px; }
+
+      /* 1. PERBAIKAN BUNGA JATUH (Z-INDEX) */
+        .sakura-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 100; }
+        .petal { position: absolute; background: #ffb7c5; border-radius: 150% 0 150% 0; opacity: 0.7; animation: fall linear infinite; }
+        @keyframes fall { 0% { transform: translateY(-10vh) rotate(0deg); } 100% { transform: translateY(110vh) rotate(360deg); } }
+
+        .page { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 20px; text-align: center; transition: 0.8s ease-in-out; background: var(--bg); z-index: 10; }
+        .hidden { opacity: 0; visibility: hidden; pointer-events: none; transform: scale(0.9); }
+
+        /* 2. PERBAIKAN SWIPER (LAYOUT FOTO & TEKS) */
+        .swiper { width: 300px; height: 460px; margin: 20px auto; }
+
+        /* Pages System */
+        .page { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 20px; text-align: center; transition: 0.8s ease-in-out; background: var(--bg); z-index: 10; }
+        .hidden { opacity: 0; visibility: hidden; pointer-events: none; transform: scale(0.9); }
+
+        /* Elements */
+        .card { background: white; padding: 40px 30px; border-radius: 30px; box-shadow: 0 10px 40px rgba(255, 133, 161, 0.2); width: 100%; max-width: 350px; }
+        h1 { font-family: 'Dancing Script', cursive; color: var(--dark-pink); font-size: 2.5rem; margin-bottom: 20px; }
+        input { width: 100%; padding: 15px; margin: 10px 0; border: 2px solid var(--pink); border-radius: 15px; outline: none; text-align: center; }
+        button { background: var(--dark-pink); color: white; border: none; padding: 15px 30px; border-radius: 25px; cursor: pointer; font-weight: bold; width: 100%; margin-top: 10px; box-shadow: 0 5px 15px rgba(255, 133, 161, 0.3); }
+
+        .swiper {
+    width: 300px; /* Ukuran kotak slide */
+    height: 450px;
+    margin-top: 30px;
+}
+
+.swiper-slide {
+    background: #fff;
+    border-radius: 20px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column; /* Biar foto di atas, teks di bawah */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.swiper-slide img {
+    width: 100%;
+    height: 80%; /* 80% buat foto */
+    object-fit: cover;
+}
+
+/* Ini biar teks otomatis muncul di setiap foto */
+.swiper-slide .slide-text {
+    height: 20%; /* 20% buat teks */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    font-size: 0.85rem;
+    font-style: italic;
+    color: #5d4037;
+    text-align: center;
+}
+
+/* Pop-up Musik Style */
+#musicModal {
+    position: fixed;
+    inset: 0;
+    background: rgba(255, 193, 204, 0.98); /* Warna pink soft */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000; /* Paling depan */
+    transition: 0.5s;
+}
+
+.modal-content {
+    background: white;
+    padding: 40px 30px;
+    border-radius: 30px;
+    text-align: center;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+    max-width: 300px;
+}
+
+.modal-content i {
+    font-size: 50px;
+    display: block;
+    margin-bottom: 20px;
+    animation: bounce 1s infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+.sakura-trail {
+  position: fixed;
+  pointer-events: none; /* Biar nggak ganggu klik tombol/input */
+  z-index: 10000;
+  width: 12px;
+  height: 8px;
+  background: #ffdae0;
+  border-radius: 50% 0 50% 50%;
+  animation: fadeOutSakura 1s forwards;
+}
+
+@keyframes fadeOutSakura {
+  0% { opacity: 1; transform: scale(1) rotate(0deg); }
+  100% { opacity: 0; transform: scale(0.5) rotate(180deg) translateY(20px); }
+}
+
+    </style>
+</head>
+<body>
+
+    <button id="musicToggle">🎵</button>
+    <div class="sakura-container" id="sakura"></div>
+
+    <div id="musicModal" class="hidden">
+    <div class="modal-content">
+        <div style="font-size: 40px; margin-bottom: 20px;">🎵</div>
+        <h2 style="font-family: 'Dancing Script'; margin-bottom: 15px;">Hidupkan Suasana?</h2>
+        <p style="font-size: 0.9rem; margin-bottom: 25px; opacity: 0.8;">Tekan tombol di bawah untuk mendengarkan lagu spesial buat kamu...</p>
+        <button id="playMusicBtn">Play Music & Continue ✨</button>
+    </div>
+</div>
+<div class="sakura-container" id="sakura"></div>
+    <div id="page1" class="page">
+        <div class="card">
+            <h1>Halo Cantik.. ✨</h1>
+            <p>Masukkan namamu & bulan lahir (MM) untuk masuk</p>
+            <input type="text" id="loginName" placeholder="Nama Lengkap">
+            <input type="password" id="loginPass" placeholder="Bulan Lahir (Contoh: 02)">
+            <button onclick="checkLogin()">Open Secret Code</button>
+        </div>
+    </div>
+
+    <div id="page2" class="page hidden">
+        <h1 style="font-size: 3.5rem;">Happy Birthday,<br>Ernasari! 🎂</h1>
+        <p style="margin: 20px 0;">Hari ini adalah harimu yang sangat berharga.</p>
+        <button onclick="nextPage(3)" style="max-width: 250px;">Tekan untuk melihat story kamu 🎀</button>
+    </div>
+
+    <div id="page3" class="page hidden">
+        <div class="swiper mySwiper">
+           <div class="swiper-wrapper">
+     <div class="swiper-slide">
+        <img src="img/poto0.jpeg">
+        <div class="slide-text">"Dimana semuanya dimulai dan bertemu dengan kamu..."</div>
+    </div>
+
+    <div class="swiper-slide">
+        <img src="img/poto%.jpeg">
+        <div class="slide-text">"Aku selalu mengusahakan segala cara sebisaku agar yang lihat ini bahagia..."</div>
+    </div>
+
+    <div class="swiper-slide">
+        <img src="img/potodew.jpeg">
+        <div class="slide-text">"Walaupun banyaknya badai aku ada ko di sisikamu..."</div>
+    </div>
+              
+    <div class="swiper-slide">
+        <img src="img/poto2.jpg">
+        <div class="slide-text">"Dari setiap kejadian pasti ada jalan..."</div>
+    </div>
+               
+    <div class="swiper-slide">
+        <img src="img/poto3.jpg">
+        <div class="slide-text">"Dari setiap perjalanan yang gak selalu baik itu menjadikan kamu yang sekarang..."</div>
+    </div>
+               
+    <div class="swiper-slide">
+        <img src="img/poto4.jpg">
+        <div class="slide-text">"Jangan merasa sendiri yah kan ada allah, keluarga dan aku di samping kamu..."</div>
+    </div>
+               
+    <div class="swiper-slide">
+        <img src="img/poto5.jpg">
+        <div class="slide-text">"Selalu bahagia dan semangat dalam segala urusannya..."</div>
+    </div>
+
+    <div class="swiper-slide">
+        <img src="img/poto6.jpg">
+        <div class="slide-text">"Cie udh 23 tahun aja nih, Apa coba harapan kedepanya..."</div>
+    </div>
+
+    <div class="swiper-slide">
+        <img src="img/poto7.jpg">
+        <div class="slide-text">"izinnnn hahahaha..."</div>
+    </div>
+
+    <div class="swiper-slide">
+        <img src="img/poto8.jpeg">
+        <div class="slide-text">"That simple cantik tuh kek gini..."</div>
+    </div>
+
+    <div class="swiper-slide">
+        <img src="img/poto9.jpeg">
+        <div class="slide-text">"Tutorial cantik ada di tiktokku..."</div>
+    </div>
+
+     <div class="swiper-slide">
+        <img src="img/poto10.jpeg">
+        <div class="slide-text">"Semakin tumbuh dewasa aja nih sayangnya aku..."</div>
+    </div>
+
+      <div class="swiper-slide">
+        <img src="img/poto11.jpeg">
+        <div class="slide-text">"Selalu bahagia yah dan jaga kesehatanya selalu..."</div>
+    </div>
+
+    <div class="swiper-slide">
+        <img src="img/poto12.jpeg">
+        <div class="slide-text">"Jangan makan makanan yang gak sehat okey..."</div>
+    </div>
+
+    <div class="swiper-slide">
+        <img src="img/poto13.jpeg">
+        <div class="slide-text">"Sekarang udah tumbuh dewasa Hpnya juga ganti yah..."</div>
+    </div>
+
+    <div class="swiper-slide">
+        <img src="img/poto14.jpeg">
+        <div class="slide-text">"sudah bacanya. Senyum dong, yu di klik lanjutkan..."</div>
+    </div>
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+        <p style="margin-bottom: 20px; font-style: italic;">"Setiap detik bersamamu adalah anugerah..."</p>
+        <button onclick="confirmName()" style="max-width: 250px;">Lanjutkan</button>
+    </div>
+
+<div id="pageRiddle" class="page hidden">
+    <div class="card">
+        <h2 style="font-family: 'Dancing Script', cursive; color: #d85a70;">Teka-teki Kecil.. ✨</h2>
+        <p>"Aku punya banyak kunci, tapi tidak bisa buka pintu. Siapakah aku?"</p>
+        <input type="text" id="riddleAnswer" placeholder="Jawabannya apa ya?" style="width:80%; padding:10px; border-radius:10px; border:2px solid var(--pink); margin-bottom: 15px;">
+        <button onclick="checkRiddle()">Cek Jawaban</button>
+        <p id="riddleHint" style="font-size: 0.8em; color: #888; margin-top: 10px;"></p>
+    </div>
+</div>
+
+    <div id="page4" class="page hidden">
+        <div class="card">
+            <h1>Berikan harapan dan doamu 🍰</h1>
+            <p>Apa harapan terbesarmu di umur 23 ini?</p>
+            <textarea id="wishInput" style="width:100%; height:120px; margin:20px 0; border:2px solid var(--pink); border-radius:15px; padding:10px;"></textarea>
+            <button onclick="sendWish()">Kirim Harapan ke Alam Semesta</button>
+        </div>
+    </div>
+
+    <audio id="bgm" loop>
+        <source src="music/musikhbd.mp3" type="audio/mpeg">
+    </audio>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script>
+     // 1. Inisialisasi EmailJS
+(function() { 
+    emailjs.init("h3wO67fwkvNLTs91v"); 
+})();
+
+// 2. Control Musik
+const bgm = document.getElementById('bgm');
+document.getElementById('musicToggle').onclick = () => {
+    bgm.paused ? bgm.play() : bgm.pause();
+};
+
+// 3. Efek Sakura Jatuh (Otomatis)
+function createPetal() {
+    const container = document.getElementById('sakura');
+    if(!container) return;
+    const petal = document.createElement('div');
+    petal.classList.add('petal');
+    petal.style.left = Math.random() * 100 + 'vw';
+    const size = Math.random() * 15 + 10 + 'px';
+    petal.style.width = size; petal.style.height = size;
+    petal.style.animationDuration = Math.random() * 3 + 4 + 's';
+    container.appendChild(petal);
+    setTimeout(() => petal.remove(), 7000);
+}
+setInterval(createPetal, 400);
+
+// 4. Efek Sakura Trail (Saat Digeser/Sentuh)
+function handleMove(e) {
+    const x = e.touches ? e.touches[0].clientX : e.clientX;
+    const y = e.touches ? e.touches[0].clientY : e.clientY;
+    const trail = document.createElement('div');
+    trail.className = 'sakura-trail';
+    trail.style.left = x + 'px';
+    trail.style.top = y + 'px';
+    const colors = ['#ffdae0', '#ffc1cc', '#f8c5d1'];
+    trail.style.background = colors[Math.floor(Math.random() * colors.length)];
+    document.body.appendChild(trail);
+    setTimeout(() => trail.remove(), 1000);
+}
+window.addEventListener('mousemove', handleMove);
+window.addEventListener('touchmove', handleMove);
+
+// 5. Login & Navigation
+function checkLogin() {
+    const name = document.getElementById('loginName').value;
+    const pass = document.getElementById('loginPass').value;
+    if(name === "Ernasari" && pass === "02") {
+        document.getElementById('page1').classList.add('hidden');
+        document.getElementById('musicModal').classList.remove('hidden');
+    } else {
+        alert("Nama atau Password salah!");
+    }
+}
+
+document.getElementById('playMusicBtn').addEventListener('click', function() {
+    bgm.play().catch(e => console.log("Audio play error:", e));
+    document.getElementById('musicModal').classList.add('hidden');
+    nextPage(2);
+});
+
+function nextPage(num) {
+    document.querySelectorAll('.page').forEach(p => p.classList.add('hidden'));
+    document.getElementById('page' + num).classList.remove('hidden');
+}
+
+// 6. Alur Teka-Teki (Ganti confirmName lama)
+function confirmName() {
+    const reConfirm = prompt("Masukkan namamu sekali lagi untuk konfirmasi:");
+    if(reConfirm === "Ernasari") {
+        alert("Selamat ulang tahun yah sayang! ❤️");
+        // PINDAH KE RIDDLE, BUKAN PAGE 4
+        nextPage('Riddle'); 
+    } else {
+        alert("Namanya salah, coba lagi..");
+    }
+}
+
+let salahHitung = 0; // Untuk menghitung berapa kali dia salah
+
+function checkRiddle() {
+    const answer = document.getElementById('riddleAnswer').value.toLowerCase().trim();
+    const hint = document.getElementById('riddleHint');
+
+    if (answer === "keyboard" || answer === "papan ketik") {
+        alert("Pinter banget sih kesayangan! ❤️");
+        nextPage(4);
+        typeWriter(); 
+    } else {
+        salahHitung++;
+        
+        // Interaksi berdasarkan jumlah kesalahan
+        if (salahHitung === 1) {
+            hint.innerHTML = "Renaldi: Ai si Erna meni tebisa sakitu gampang o g.. ✨";
+        } else if (salahHitung === 2) {
+            hint.innerHTML = "Renaldi: Kudu di huapan wae Aghhhh na cari tau sendiri! 💪";
+        } else if (salahHitung === 3) {
+            hint.innerHTML = "Renaldi(ngedumel): Bener bener meni te apal ihh kesel eta nu di pake sapopoe na hp naon.. 😉";
+        } else {
+            hint.innerHTML = "Renaldi(Soft Spoken): Benda yang lagi kamu pake buat ngetik balasan ini! 🌸";
+        }
+        
+        // Kosongkan input biar dia bisa ngetik ulang dengan bersih
+        document.getElementById('riddleAnswer').value = "";
+    }
+}
+
+// 7. Efek Ngetik Otomatis
+const textJudul = "Berikan harapan dan doamu... ✨";
+let charIndex = 0;
+function typeWriter() {
+    const element = document.getElementById("judul");
+    if (charIndex < textJudul.length) {
+        element.innerHTML += textJudul.charAt(charIndex);
+        charIndex++;
+        setTimeout(typeWriter, 100);
+    }
+}
+
+// 8. Swiper & Send Wish
+const swiper = new Swiper('.mySwiper', {
+    effect: 'cards',
+    grabCursor: true,
+    slideToClickedSlide: true,
+});
+
+function sendWish() {
+    const wish = document.getElementById('wishInput').value;
+    if(!wish) return alert("Harapannya diisi dulu ya cantik.. ❤️");
+    
+    emailjs.send("service_1h5vw68", "template_u7igh8o", {
+        message: wish, 
+        to_email: "ernasari25022003@gmail.com"
+    }).then(() => {
+        alert("Yay! Harapanmu sudah terkirim ke Email & Bintang ✨");
+        window.open(`https://wa.me/6285798660971?text=${encodeURIComponent('Harapanku: ' + wish)}`, '_blank');
+    });
+}
+    </script>
+</body>
+</html>
